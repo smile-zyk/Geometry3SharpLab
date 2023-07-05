@@ -1,0 +1,160 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:hc="clr-namespace:HandyControl.Data.Enum;assembly=HandyControl"
+                    xmlns:ap="clr-namespace:Geometry3SharpLab.AttachedProperty">
+    <Style x:Key="VisibleCheckBox" TargetType="CheckBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Image Width="24" Height="24" x:Name="Image"></Image>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/InvisibleSelect.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/InvisibleSelectOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/VisibleSelect.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/VisibleSelectOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/Invisible.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/InvisibleOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/Visible.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/VisibleOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/Invisible.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/InvisibleOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/Visible.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="True" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/VisibleOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/Invisible.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/InvisibleOver.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/Visible.png" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ap:Helper.IsSelected" Value="False" />
+                                <Condition Property="ap:Helper.IsFoucs" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Image" Property="Source" Value="Resources/VisibleOver.png" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
