@@ -21,16 +21,13 @@ namespace Geometry3SharpLab.ViewModels
         {
             OpenFileCommand = new RelayCommand(OpenFile);
             SceneTreeItemChangedCommand = new RelayCommand<object>(SceneTreeItemChanged);
-            SceneRootNodes = new ObservableCollection<SceneTreeNode>();
+            RenderScene = new Scene();
         }
 
         private void SceneTreeItemChanged(object obj)
         {
             SceneTreeNode node = obj as SceneTreeNode;
-            foreach(var root in SceneRootNodes)
-            {
-                SceneTreeNode.TraverseNode(root, (n) => { n.IsSelected = false; });
-            }
+            SceneTreeNode.TraverseNode(RenderScene.SceneRoot, (n) => { n.IsSelected = false; });
             SelectedNode = node;
             SelectedNode.IsSelected = true;
         }
@@ -44,19 +41,19 @@ namespace Geometry3SharpLab.ViewModels
             {
                 string filePath = openFileDialog.FileName;
                 SceneTreeNode node = new SceneTreeNode();
-                node.Renderer = VTKRenderer;
                 node.ReadFile(filePath);
-                SceneRootNodes.Add(node);
+                RenderScene.AddNode(node);
+                SceneTreeNode.TraverseNode(RenderScene.SceneRoot, (n) => { n.IsExpanded = true; });
             }
         }
 
         public SceneTreeNode SelectedNode { get; set; }
 
-        private ObservableCollection<SceneTreeNode> _sceneRootNodes;
-        public ObservableCollection<SceneTreeNode> SceneRootNodes
+        private Scene renderScene;
+        public Scene RenderScene
         {
-            get => _sceneRootNodes;
-            set => SetProperty(ref _sceneRootNodes, value);
+            get => renderScene;
+            set => SetProperty(ref renderScene, value);
         }
 
         private vtkRenderer _vtkRenderer;

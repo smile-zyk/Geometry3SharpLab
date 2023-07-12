@@ -16,6 +16,8 @@ namespace Geometry3SharpLab.Models
         public static void TraverseNode(SceneTreeNode node, Action<SceneTreeNode> action)
         {
             if (node == null) return;
+            Console.WriteLine("Name: {0}, IsVisibity: {1}, IsExpanded: {2}"
+                , node.Name, node.IsVisibilty, node.IsExpanded);
             action?.Invoke(node);
             foreach (var child in node.Children)
             {
@@ -33,8 +35,6 @@ namespace Geometry3SharpLab.Models
             Children.CollectionChanged += (s, e) => { OnPropertyChanged(nameof(Children)); };
         }
 
-        public vtkRenderer Renderer { set; get; }
-
         public void ReadFile(string path)
         {
             string extension = Path.GetExtension(path);
@@ -51,7 +51,7 @@ namespace Geometry3SharpLab.Models
             }
             vtkPolyDataMapper mapper = vtkPolyDataMapper.New();
             mapper.SetInputConnection(reader.GetOutputPort());
-            Name = Path.GetFileName(path);
+            Name = Path.GetFileNameWithoutExtension(path);
             Actor = vtkActor.New();
             Actor.SetMapper(mapper);
             Uid = Guid.NewGuid();
@@ -82,6 +82,13 @@ namespace Geometry3SharpLab.Models
             {
                 SetProperty(ref _isSelected, value);
             }
+        }
+
+        private bool _isExpanded = true; 
+        public bool IsExpanded
+        {
+            get { return _isExpanded; }
+            set { SetProperty(ref _isExpanded, value); }
         }
 
         private Guid _uid;

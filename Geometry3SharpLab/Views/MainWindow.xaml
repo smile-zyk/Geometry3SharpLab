@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vtk="clr-namespace:Kitware.VTK;assembly=Kitware.VTK"
+        xmlns:vtki="clr-namespace:Geometry3SharpLab.VTK"
+        xmlns:ui="clr-namespace:Geometry3SharpLab.UI"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:Geometry3SharpLab" 
         xmlns:viewmodels="clr-namespace:Geometry3SharpLab.ViewModels" 
-        xmlns:ap = "clr-namespace:Geometry3SharpLab.AttachedProperty"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="Geometry3SharpLab" Height="900" Width="1600"
@@ -27,29 +28,27 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Expander IsExpanded="True" Margin="2,5,2,2" Header="场景树">
-                    <TreeView x:Name="SceneTree" ItemsSource="{Binding SceneRootNodes}">
-                        <behaviors:Interaction.Triggers>
-                            <behaviors:EventTrigger EventName="SelectedItemChanged">
-                                <behaviors:InvokeCommandAction Command="{Binding SceneTreeItemChangedCommand}" 
+                <TreeView ItemContainerStyle="{StaticResource SceneViewItem}" x:Name="SceneTree" ItemsSource="{Binding RenderScene.SceneItemSources}">
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="SelectedItemChanged">
+                            <behaviors:InvokeCommandAction Command="{Binding SceneTreeItemChangedCommand}" 
                                                                CommandParameter="{Binding ElementName=SceneTree, Path=SelectedItem}"/>
-                            </behaviors:EventTrigger>
-                        </behaviors:Interaction.Triggers>
-                        <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                <Grid>
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name}"/>
-                                    <CheckBox VerticalAlignment="Center" ap:Helper.IsFoucs="{Binding ElementName=SceneTree, Path=IsKeyboardFocusWithin, Mode=OneWay}" ap:Helper.IsSelected="{Binding IsSelected}" IsChecked="{Binding IsVisibilty}" Margin="0,0,32,0" Style="{StaticResource VisibleCheckBox}" HorizontalAlignment="Right" />
-                                </Grid>
-                            </HierarchicalDataTemplate>
-                        </TreeView.ItemTemplate>
-                    </TreeView>
-                </Expander>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <Grid>
+                                <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name}"/>
+                                <CheckBox VerticalAlignment="Center" ui:AttachedProperty.IsSelected="{Binding IsSelected}"  ui:AttachedProperty.IsFoucs="{Binding ElementName=SceneTree, Path=IsKeyboardFocusWithin, Mode=OneWay}" IsChecked="{Binding IsVisibilty}" Margin="0,0,32,0" Style="{StaticResource VisibleCheckBox}" HorizontalAlignment="Right" />
+                            </Grid>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
             </Grid>
             <WindowsFormsHost 
-                ap:Helper.Renderer="{Binding VTKRenderer, Mode=OneWayToSource}" 
-                ap:Helper.RenderWindow="{Binding ElementName=VtkWindow, Mode=OneTime}" 
-                ap:Helper.SceneRoots="{Binding SceneRootNodes}"
+                vtki:AttachedProperty.RenderScene="{Binding RenderScene}"
+                vtki:AttachedProperty.Renderer="{Binding VTKRenderer, Mode=OneWayToSource}" 
+                vtki:AttachedProperty.RenderWindow="{Binding ElementName=VtkWindow, Mode=OneTime}" 
                 Margin="2,5,2,2" Grid.Column="1">
                 <vtk:RenderWindowControl x:Name="VtkWindow">
                 </vtk:RenderWindowControl>
